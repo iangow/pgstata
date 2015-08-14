@@ -1,0 +1,92 @@
+{smcl}
+{* 06jul2007/06jul2007}{...}
+{hline}
+help {cmd:pgload}{right:CEU 2007}
+{hline}
+
+{title:Title}
+
+{p 4}{cmd:pgload} -- Load data from PostgreSQL databases
+
+
+{title:Syntax}
+
+{p 4}{cmd:pgload} {opt CONNECTSTRING} {opt QUERY}, {it:{help pgload##load_options:load_options}}
+
+
+{title:Description}
+
+{pstd}{cmd:pgload} loads data from PostgreSQL databases.  It is useful in
+situations where loading data via {cmd:odbc} is either not possible or is too slow.
+
+{pstd}{cmd:pgload} loads data from the database named in
+{opt CONNECTSTRING}, using the query given in {opt QUERY}. Both 
+{opt CONNECTSTRING} and {opt QUERY} 
+should be given in double quotes.  {opt CONNECTSTRING} is a string including a
+space-delimited list of the any of the following directives:
+
+{synoptset 20 tabbed}{...}
+{synopthdr}
+{synoptline}
+{synopt :{opt host=DBHOST}}DBHOST is the hostname or IP address of the
+database server{p_end}
+{synopt :{opt dbname=DBNAME}}DBNAME is the database name.  This option is
+required in all cases.{p_end}
+{synopt :{opt user=USER}}USER is the database username{p_end}
+{synopt :{opt password=PASSWORD}}PASSWORD is the database password for the given
+username{p_end}
+{synoptline}
+{p2colreset}{...}
+
+{pstd}The format you use depends on how your {it:~/.pgpass} file and environment
+variables have been set up: one only needs to specify non-default values in 
+{opt CONNECTSTRING}.  For example if your Unix username is the same as your database
+username (or the PGUSER is appropriately set), there is no need to include
+{opt user=USER}.  Note that {opt DBNAME} is always required.
+
+{pstd}Note that including passwords in do files is unwise for security
+reasons.  Alternatives are to include your password in {it:~/.pgpass} or
+set your PGPASSWORD environment variable.
+
+
+{marker load_options}{...}
+{title:Load options}
+
+{phang}
+{opt clear} indicates that the resident dataset should be cleared prior to
+loading new data.  Note that {cmd:pgload} will fail if there is already data in
+memory and this option is not specified.
+
+{phang}
+{opt debug} will show a variety of connection-related and dataset-related
+debugging output during load
+
+
+{title:Examples}
+
+{phang}{cmd:. pgload "dbname=cities" "SELECT * FROM populations"}
+
+{phang}{cmd:. pgload "dbname=bigstudy user=ella" "SELECT * FROM my_view"}
+
+{phang}{cmd:. pgload "dbname=sales user=joe host=hugin password=tellno1" "SELECT * FROM contacts WHERE last_update > '2007-10-05' LIMIT 10000"}
+
+
+{title:Limitations}
+
+{phang}{cmd:pgload} does not support prompting for a database password.  All
+credentials must be stored in {it:~./pgpass} or in PostgreSQL environment
+variables.
+
+{phang}{cmd:pgload} supports many, but not all, PostgreSQL data types.
+Unrecognised data types are imported as strings.
+
+
+{title:See Also}
+
+{psee}
+Online: {helpb odbc}
+
+{psee}
+Unix manpage: {hi:psql}
+
+{psee} PostgreSQL environment variables: http://www.postgresql.org/docs/8.1/interactive/libpq-envars.html

@@ -1,0 +1,141 @@
+2008-09-29 16:45  andrewc
+
+	* LICENSE-2.0.txt, Makefile, changelog.txt, gpl-3.0.txt,
+	  lgpl-3.0.txt, pg.c, pgload.ado: Prepare for distribution in
+	  tarball Minimal form. License appropriately, and add a maintclean
+	  target for the preparation of changelogs.
+
+2007-09-24 11:44  davee
+
+	* pg.c: Fix for bug 774
+
+2007-08-30 14:42  andrewc
+
+	* Makefile, pg.c: New version: 0.1.
+
+	  Refactor cleanup code into two separate routines. Add a `dist`
+	  target to the Makefile, and automate changelog generation for the
+	  tarball. Organise and tidy plugin code.
+
+2007-07-19 16:44  davee
+
+	* pg.c: Set SLURP to 10000, seems to be a good value
+
+2007-07-19 16:31  davee
+
+	* Makefile: Add an install target
+
+2007-07-18 08:56  davee
+
+	* pgload.hlp: Indicate which conninfo directives are
+	  optional/mandatory
+
+2007-07-17 18:13  andrewc
+
+	* pg.c, pgload.ado: Add hooks for debugging options, and ensure
+	  they get called.
+
+2007-07-17 17:23  davee
+
+	* pgload.ado: Add support for 'clear' and 'debug' options
+
+2007-07-17 15:08  davee
+
+	* pgload.hlp: Rewritten help file, assuming eventual presence of
+	  options for 'clear' and 'debug'
+
+2007-07-16 13:26  andrewc
+
+	* pg.c: Produce textual descriptions of incompletely supported
+	  types rather than OIDs.
+
+	  Every postgres type is now at least partially supported, so let's
+	  not make a false distinction.
+
+2007-07-13 16:23  andrewc
+
+	* pg.c: Apply DE's patch for boolean.
+
+	  Partial support for some more types (as strings). Plugin no
+	  longer crashes and burns when an unrecognised type is
+	  encountered: instead, it moans about it and imports it as a
+	  possibly truncated str244.
+
+2007-07-12 12:53  andrewc
+
+	* pg.c: Bugfix: ensure sizes of programaticaly generated CHARACTER
+	  VARYING fields never cause the plugin to attempt to create Stata
+	  string vars of < 1 character in length.
+
+2007-07-12 11:39  andrewc
+
+	* pg.c, pgload.ado: Merged changes from count_removal_20070709.
+
+2007-07-11 12:17  davee
+
+	* benchmark.sh, get-timings.pl, peakmem.pl: Add benchmark tools
+
+2007-07-09 17:23  andrewc
+
+	* pg.c, pgload.ado: Remove need for a count() before rows start
+	  returning. The workspace will grow dynamically up to the limit of
+	  available workspace memory in Stata. The downside of this is that
+	  if there isn't enough memory available up front, the user won't
+	  be told right away.
+
+	  PGSTATA_CURSOR_SLURP_ROWS is now 100000 because control returns
+	  back to the program ADO-file regularly enough for it to
+	  potentially slow things down.
+
+2007-07-06 15:58  andrewc
+
+	* pgload.hlp: Add a basic help file
+
+2007-07-05 13:53  andrewc
+
+	* pg.c: Make VARCHAR(n<245) be handled the same way as CHAR(n<245).
+
+2007-07-05 12:46  andrewc
+
+	* pg.c, pgload.ado: Refuse to overwrite or clear data in memory.
+
+2007-07-05 12:15  andrewc
+
+	* pg.c, pgload.ado: Deal with varchar lengths sensibly.  Improve
+	  progress messaging.  No longer call compress for PR reasons.
+
+2007-07-04 12:31  andrewc
+
+	* pg.c, pgload.ado: Basic progress meter to give users a clue how
+	  long the load is going to take.
+
+2007-07-04 11:45  andrewc
+
+	* pg.c, pgload.ado: Interface change: pgload now takes a CONNINFO
+	  string and a SQL query.  LIMITs now suported without dropping
+	  into an infinite loop :/ Tidy up error handling in ADO wrapper.
+
+2007-07-04 10:32  andrewc
+
+	* pg.c: Optimisations. Tidy main fetch loop, make BPCHAROID always
+	  mean something that can fit into a Stata string, replace mktime()
+	  with something much faster.
+
+2007-07-02 17:18  andrewc
+
+	* pg.c, pgload.ado: Support formatting for dates.
+
+2007-07-02 16:35  andrewc
+
+	* pg.c: Support pg floating-point and numeric values.  Support pg
+	  date/times and dates.  Use atol() for integer conversions rather
+	  than sscanf().
+
+2007-07-02 12:27  andrewc
+
+	* Makefile, pg.c, pgload.ado: Initial import.
+
+2007-07-02 12:27  andrewc
+
+	* Makefile, pg.c, pgload.ado: Initial revision
+
