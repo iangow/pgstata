@@ -40,7 +40,7 @@ CFLAGS=-std=c99 -Wall -pedantic -DSYSTEM=$(PLUGIN_SYS)	\
 all: $(PLUGIN_NAME).plugin
 
 $(PLUGIN_NAME).plugin: pg.c $(STATAPLUG_C) Makefile
-	$(CC) -DSYSTEM=OPUNIX $(STATAPLUG_C) $< -o $@ $(CFLAGS) $(LDOPTS)
+	$(CC) -DSYSTEM=APPLEMAC $(STATAPLUG_C) $< -o $@ $(CFLAGS) $(LDOPTS)
 
 clean:
 	rm -f $(PLUGIN_NAME).plugin
