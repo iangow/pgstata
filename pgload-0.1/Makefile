@@ -1,9 +1,9 @@
 PLUGIN_NAME=pg
-PLUGIN_SYS=OPUNIX
+PLUGIN_SYS=APPLEMAC
 
 # Set this to where you want 'make install' to install to.
 
-INSTALL_LOCATION=/usr/local/ado/p
+INSTALL_LOCATION=~/Library/Application\ Support/Stata/ado/personal
 INSTALL_LIST=pg.plugin pgload.ado pgload.hlp
 
 # Distribution in tarball form
@@ -15,13 +15,13 @@ DIST_LIST=pg.c Makefile pgload.ado pgload.hlp LICENSE-2.0.txt lgpl-3.0.txt READM
 # Set this to the location of your downloaded stplugin.h and stplugin.c
 # Get these from http://www.stata.com/plugins/ .
 
-STATAPLUG_INC=/usr/local/include/stata
+STATAPLUG_INC=..
 STATAPLUG_C=$(STATAPLUG_INC)/stplugin.c
 
 # Settings for building under Debian GNU/Linux "Sarge" (3.1) on amd64 (x86-64)
 
-PQ_INC=/usr/include/postgresql
-PG_SERVER_INC=/usr/include/postgresql/server
+PQ_INC=/opt/local/include/postgresql94
+PG_SERVER_INC=/opt/local/include/postgresql94/server
 
 # Different systems will require different linker options. The following should
 # work for both ia32 (x86-32, i386) and amd64 (x86-64).
