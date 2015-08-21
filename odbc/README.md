@@ -17,7 +17,6 @@ cd psqlodbc-09.03.0400
 ./configure --with-iodbc --enable-pthreads --with-libpq=/opt/local/bin/pg_config
 make
 sudo make install
-
 ```
 
 ## 3. Install ODBC administrator and set up DSN
