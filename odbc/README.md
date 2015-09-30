@@ -1,32 +1,24 @@
 
-## 1. Install iODBC
+## 1. Get psqlODBC
 
-Using MacPorts:
-```
-sudo port install libiodbc
-```
+A Zip file with PostgreSQL drvier for ODBC can be found [here](https://ftp.postgresql.org/pub/odbc/versions/msi/psqlodbc_09_03_0400.zip). Download this, extract, and install.
 
-## 2. Get psqlODBC
+## 2. Set up DSN in ODBC
 
-The following assumes a MacPorts installation of PostgreSQL. Omit the `--with-libpq=/opt/local/bin/pg_config` part if this does not apply to you. (You might have to do `sudo port select postgresql postgresql94` or use `--with-libpq=/opt/local/lib/postgresql94/bin/pg_config` if the configuration script still can't find `pg_config`.)
+Goty to the "Start" menu and type in "ODBC". Options like "Set up data sources (ODBC)" (Control Panel) or "Data Sources (ODBC)" should appear. Select one of these options.
 
-```
-wget https://ftp.postgresql.org/pub/odbc/versions/src/psqlodbc-09.03.0400.tar.gz
-tar xzf psqlodbc-09.03.0400.tar.gz 
-cd psqlodbc-09.03.0400
-./configure --with-iodbc --enable-pthreads --with-libpq=/opt/local/bin/pg_config
-make
-sudo make install
-```
+Set up a User DSN.
 
-## 3. Install ODBC administrator and set up DSN
+### 1. Click "Add ..." then select PostgreSQL Unicode as the driver.
 
-Get [ODBC Administrator Tool for Mac OS X v1.0](https://support.apple.com/kb/DL895?locale=en_US).
-Open ODBC Administrator and set up the driver:
+![](odbc1.PNG?raw=true)
 
-![](driver.png?raw=true)
 
-and then the "User DSN":
+![](odbc2.PNG?raw=true)
 
-![](user_dsn.png?raw=true)
+### 2. Set up the driver as follows
+
+Use your User ID, etc.
+
+![](odbc3.PNG?raw=true)
 
